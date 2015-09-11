@@ -1,14 +1,42 @@
 {% extends 'base.html' %}
 
 {% load staticfiles %}
+{% load trans from i18n %}
 
 {% block content %}
 <div class="container">
     <div class="row-fluid content-wrapper">
         <div class="main-box">
-          <p>Test</p>
+          <form action="{% url 'main' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="form-group">
+              <label for="exampleInputFile">{{ form.baseline_file.label }}</label>
+              <p class="form-errors">{{ form.baseline_file.errors.as_text }}</p>
+              <input type="file" name="{{ form.baseline_file.html_name }}" id="exampleInputFile">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputFile">{{ form.file_to_compare.label }}</label>
+              <p class="form-errors">{{ form.file_to_compare.errors.as_text }}</p>
+              <input type="file" name="{{ form.file_to_compare.html_name }}" id="exampleInputFile">
+              <p class="help-block">{% trans 'This file will be compared with the first (baseline) file' %}</p>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputFile">{{ form.comparing_option.label }}</label>
+              <p class="form-errors">{{ form.comparing_option.errors.as_text }}</p>
+              <select class="form-control" name = "{{ form.comparing_option.html_name }}">
+                {% for choice, value in form.fields.comparing_option.choices %}
+                <option value="{{ choice }}" {% if form.cleaned_data.comparing_option %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
         </div>
     </div>
 </div>
-
 {% endblock %}
