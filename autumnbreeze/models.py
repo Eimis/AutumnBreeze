@@ -10,11 +10,12 @@ class ComparingOption(models.Model):
     Django admin and selected from a dropdown field when files are uploaded via
     front-end.
     '''
+    location_name = models.CharField(max_length=100)
     baseline_days = models.PositiveSmallIntegerField(help_text=_(
-        'Number of days to compare from baseline file'
+        'Number of days to compare from baseline file.'
     ))
     days_to_compare = models.PositiveSmallIntegerField(help_text=_(
-        'Number of days to compare from second file file'
+        'Number of days to compare from second file.'
     ))
     fluctuation = models.PositiveSmallIntegerField(help_text=_(
         'An adjustable number of fluctuation in percentage to calculate \
@@ -25,6 +26,7 @@ class ComparingOption(models.Model):
     ))
 
     def __unicode__(self):
-        return (str(self.baseline_days) + '/'
+        return (self.location_name + ' ('
+                + str(self.baseline_days) + '/'
                 + str(self.days_to_compare) + '/'
-                + str(self.fluctuation) + '%')
+                + str(self.fluctuation) + '%)')
