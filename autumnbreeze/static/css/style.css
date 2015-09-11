@@ -1,0 +1,11 @@
+div.content-wrapper {
+    height: 100vh;
+}
+
+div.main-box {
+    width: 40%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 10%;
+    text-align: center;
+}
