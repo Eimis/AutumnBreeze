@@ -20,6 +20,11 @@ class ComparingOption(models.Model):
         'An adjustable number of fluctuation in percentage to calculate \
         fluctuation between two data sets. F. ex. if number 20 will be saved \
         in this field, when two files will be compared, the system will try \
-        to track a 20% increase of lication_ids that were mentioned in a \
+        to track a 20% increase of location_ids that were mentioned in a \
         particular day.'
     ))
+
+    def __unicode__(self):
+        return (str(self.baseline_days) + '/'
+                + str(self.days_to_compare) + '/'
+                + str(self.fluctuation) + '%')
