@@ -1,1 +1,2 @@
 Django==1.8.4
+django-toolbelt==0.0.1
