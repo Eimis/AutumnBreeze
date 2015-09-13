@@ -27,8 +27,12 @@ def main(request):
 
             # create two iterators for each file using tee(),
             # because iterators expire after they're used:
-            baselinefile_it1, baselinefile_it2 = itertools.tee(baseline_file, 2)
-            comparedfile_it1, comparedfile_it2 = itertools.tee(file_to_compare, 2)
+            baselinefile_it1, baselinefile_it2 = itertools.tee(
+                baseline_file, 2
+            )
+            comparedfile_it1, comparedfile_it2 = itertools.tee(
+                file_to_compare, 2
+            )
 
             # find out different days in files:
             different_baseline_days = []
@@ -50,7 +54,9 @@ def main(request):
             for i, row in enumerate(baselinefile_it2):
                 # make sure we're using correct number of days from the first
                 # file:
-                if row[2] in different_baseline_days[:comparing_option.baseline_days]:
+                if row[2] in different_baseline_days[
+                    :comparing_option.baseline_days
+                ]:
                     if row[0] not in baseline_file_data:
                         baseline_file_data[row[0]] = []
                     baseline_file_data[row[0]].append(row)
@@ -59,7 +65,9 @@ def main(request):
             for i, row in enumerate(comparedfile_it2):
                 # make sure we're using correct number of days from the second
                 # file:
-                if row[2] in different_comparedfile_days[:comparing_option.days_to_compare]:
+                if row[2] in different_comparedfile_days[
+                    :comparing_option.days_to_compare
+                ]:
                     if row[0] not in compared_file_data:
                         compared_file_data[row[0]] = []
                     compared_file_data[row[0]].append(row)
@@ -86,7 +94,7 @@ def main(request):
                     ) / len(baseline_file_data[location_id])
                     # only count *increased* fluctuation (because this is a
                     # test task):
-                    if percentage_increase > 0:
+                    if percentage_increase <= comparing_option.fluctuation:
                         data_fluctuations[location_id] = ''.join(
                             [str(percentage_increase), '%']
                         )
