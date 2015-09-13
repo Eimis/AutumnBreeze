@@ -2,7 +2,10 @@ import csv
 import collections
 import itertools
 
-from django.shortcuts import render, render_to_response
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 from autumnbreeze.forms import AnomalyForm
@@ -132,3 +135,7 @@ def main(request):
 
 def results(request):
     return render(request, 'results.html', {})
+
+
+def home_redirect(request):
+    return HttpResponseRedirect(reverse('main'))

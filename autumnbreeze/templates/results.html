@@ -8,6 +8,7 @@
 <div class="container">
     <div class="row-fluid content-wrapper">
         <div class="main-box">
+          <a href="{% url 'home_redirect' %}">Return to main page</a>
           {% if new_location_ids %}
               <p>{% trans 'There were some new locations detected in the 2nd document' %}:</p>
               {% for location_id in new_location_ids %}
@@ -36,6 +37,7 @@
                 <hr>
             {% endfor %}
           {% endif %}
+        <a href="{% url 'home_redirect' %}">Return to main page</a>
         </div>
     </div>
 </div>
