@@ -12,20 +12,20 @@
             {{ form.non_field_errors }}
 
             <div class="form-group">
-              <label for="exampleInputFile">{{ form.baseline_file.label }}</label>
+              <label>{{ form.baseline_file.label }}</label>
               <p class="form-errors">{{ form.baseline_file.errors.as_text }}</p>
-              <input type="file" name="{{ form.baseline_file.html_name }}" id="exampleInputFile">
+              <input type="file" name="{{ form.baseline_file.html_name }}">
             </div>
 
             <div class="form-group">
-              <label for="exampleInputFile">{{ form.file_to_compare.label }}</label>
+              <label>{{ form.file_to_compare.label }}</label>
               <p class="form-errors">{{ form.file_to_compare.errors.as_text }}</p>
-              <input type="file" name="{{ form.file_to_compare.html_name }}" id="exampleInputFile">
+              <input type="file" name="{{ form.file_to_compare.html_name }}">
               <p class="help-block">{% trans 'This file will be compared with the first (baseline) file' %}</p>
             </div>
 
             <div class="form-group">
-              <label for="exampleInputFile">{{ form.comparing_option.label }}</label>
+              <label>{{ form.comparing_option.label }}</label>
               <p class="form-errors">{{ form.comparing_option.errors.as_text }}</p>
               <select class="form-control" name = "{{ form.comparing_option.html_name }}">
                 {% for choice, value in form.fields.comparing_option.choices %}

@@ -2,12 +2,40 @@
 
 {% load staticfiles %}
 {% load trans from i18n %}
+{% load template_tags %}
 
 {% block content %}
 <div class="container">
     <div class="row-fluid content-wrapper">
         <div class="main-box">
-          {{ results }}
+          {% if new_location_ids %}
+              <p>{% trans 'There were some new locations detected in the 2nd document' %}:</p>
+              {% for location_id in new_location_ids %}
+              <p><b>{{ location_id }}</b></p>
+                {% for row in compared_file_data|get_item:location_id %}
+                    {{ row }}<br>
+                {% endfor %}
+              <br>
+              {% endfor %}
+          {% endif %}
+
+          {% if data_fluctuations %}
+              <p>{% trans 'There were some data fluctuations detected in the 2nd document' %}:</p>
+            {% for location_id, percentage_increase in data_fluctuations.items %}
+                <br>
+                <p> Location id <b>{{ location_id }}</b> was mentioned <b>{{ percentage_increase }}</b> times more:</p>
+                <p>First document</p>
+                {% for row in baseline_file_data|get_item:location_id %}
+                    {{ row }}<br>
+                {% endfor %}
+                <br>
+                <p>Second document</p>
+                {% for row in compared_file_data|get_item:location_id %}
+                    {{ row }}<br>
+                {% endfor %}
+                <hr>
+            {% endfor %}
+          {% endif %}
         </div>
     </div>
 </div>
