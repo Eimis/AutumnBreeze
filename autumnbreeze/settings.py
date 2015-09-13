@@ -105,6 +105,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MAX_UPLOAD_SIZE = 2621440  # 2.5 mb
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
