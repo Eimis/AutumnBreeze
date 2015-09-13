@@ -99,11 +99,6 @@ def main(request):
                             [str(percentage_increase), '%']
                         )
 
-            print(data_fluctuations)
-            print(baseline_file_data['3'])
-
-            # raise Exception('on purpose')
-
             context = {
                 'baseline_file_data': baseline_file_data,
                 'compared_file_data': compared_file_data,
@@ -111,6 +106,7 @@ def main(request):
                 'new_location_ids': new_location_ids,
             }
 
+            # TODO: implement redirect while keeping context:
             return render_to_response(
                 "results.html",
                 context,
